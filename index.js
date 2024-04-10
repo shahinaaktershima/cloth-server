@@ -111,7 +111,7 @@ app.get('/user/admin/:email',async(req,res)=>{
         total_amount: deposit.price,
         currency: "BDT",
         tran_id: trans_id,
-        success_url: `http://localhost:5000/payment/success/${trans_id}`,
+        success_url: `https://agro-firm-server.vercel.app/payment/success/${trans_id}`,
         fail_url: "http://localhost:3030/fail",
         cancel_url: "http://localhost:3030/cancel",
         ipn_url: "http://localhost:3030/ipn",
@@ -163,7 +163,7 @@ app.get('/user/admin/:email',async(req,res)=>{
 
           if (result.modifiedCount > 0) {
             res.redirect(
-              `http://localhost:5173/dashboard/success/${trans_id}`
+              `https://agro-firm-projects.vercel.app/dashboard/success/${trans_id}`
             );
           }
         });
