@@ -9,7 +9,16 @@ const port=process.env.PORT||5000;
 // middle ware
 app.use(cors());
 app.use(express.json());
-
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5000",
+      "https://agro-firm-projects.vercel.app",
+      "https://agro-firm-projects-git-main-shahinaaktershimas-projects.vercel.app",
+    ],
+    credentials: true,
+  })
+);
 
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.hfsk54e.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
