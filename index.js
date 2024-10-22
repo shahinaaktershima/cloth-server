@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: [
-      "http://localhost:5173",
+      // "http://localhost:5173",
       // "https://agro-firm-projects.vercel.app",
       // "https://agro-firm-projects-git-main-shahinaaktershimas-projects.vercel.app",
     ],
@@ -41,30 +41,30 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
 const paymentCollection = client
-      .db("productCollection")
+      .db("clothCollection")
       .collection("payment");
-    const productCollection=client.db('productCollection').collection('product');
- const userCollection=client.db('userCollection').collection('user');
+    const clothCollection=client.db('clothCollection').collection('product');
+ const usercollect=client.db('usercollect').collection('user');
     app.post('/product',async(req,res)=>{
       const product=req.body;
       console.log(product);
-      const result=await productCollection.insertOne(product);
+      const result=await clothCollection.insertOne(product);
       res.send(result)
     })
  app.get('/product',async(req,res)=>{
-  const result=await productCollection.find().toArray();
+  const result=await clothCollection.find().toArray();
     res.send(result);
  })
  app.get('/product/:id',async(req,res)=>{
   const id=req.params.id;
   const query={_id: new ObjectId(id)}
-  const result=await productCollection.findOne(query)
+  const result=await clothCollection.findOne(query)
   res.send(result)
  })
  app.delete('/product/:id',async(req,res)=>{
   const id=req.params.id;
   const query={_id:new ObjectId(id)}
-  const result=await productCollection.deleteOne(query);
+  const result=await clothCollection.deleteOne(query);
   res.send(result)
 
 })
@@ -72,22 +72,22 @@ const paymentCollection = client
 app.post('/user',async(req,res)=>{
     const user=req.body;
     const query={email:user.email}
-    const existingUser=await userCollection.findOne(query)
+    const existingUser=await usercollect.findOne(query)
     if(existingUser){
         return res.send({message:'user already exists', insertedId:null})
     }
-    const result=await userCollection.insertOne(user);
+    const result=await usercollect.insertOne(user);
     res.send(result)
 })
 
 app.get('/user',async(req,res)=>{
-    const result=await userCollection.find().toArray();
+    const result=await usercollect.find().toArray();
     res.send(result)
 })
 app.delete('/user/:id',async(req,res)=>{
     const id=req.params.id;
     const query={_id: new ObjectId(id)}
-    const result=await userCollection.deleteOne(query);
+    const result=await usercollect.deleteOne(query);
     res.send(result);
   });
   // admin related api
@@ -95,7 +95,7 @@ app.get('/user/admin/:email',async(req,res)=>{
   const email = req.params.email;
 
   const query = { email: email };
-  const user = await userCollection.findOne(query);
+  const user = await usercollect.findOne(query);
 
   res.send(user);
     })
@@ -107,7 +107,7 @@ app.get('/user/admin/:email',async(req,res)=>{
           role: "admin",
         },
       };
-      const result = await userCollection.updateOne(filter, updateDoc);
+      const result = await usercollect.updateOne(filter, updateDoc);
       res.send(result);
       })
 // payment
@@ -195,8 +195,8 @@ run().catch(console.dir);
 
 
 app.get('/',(req,res)=>{
-    res.send('agro firm is running')
+    res.send('boutique shop is running')
 })
 app.listen(port,()=>{
-    console.log(`agro firm is running on port ${port}`);
+    console.log(`boutique shop is running on port ${port}`);
 })
