@@ -13,8 +13,8 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://agro-firm-projects.vercel.app",
-      "https://agro-firm-projects-git-main-shahinaaktershimas-projects.vercel.app",
+      // "https://agro-firm-projects.vercel.app",
+      // "https://agro-firm-projects-git-main-shahinaaktershimas-projects.vercel.app",
     ],
     credentials: true,
   })
